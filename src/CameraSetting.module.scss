@@ -1,0 +1,19 @@
+/*
+ * Created by Stefan Hong on 2021-04-01.
+ * Copyright (c) 2021 Taiwan AI Labs.
+ */
+.qrcodeView {
+  text-align: center;
+  background-color: white;
+  canvas {
+    margin: 33px 0 25px;
+    display: inline-block;
+  }
+  p {
+    color: black;
+  }
+}
+
+.controls {
+  padding: 8px;
+}
