@@ -26,7 +26,7 @@ const ORCodeView: FC<{ code: string; size?: number }> = ({ code, size = 330 }) =
 
 const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   const [large, setLarge] = useState<string>('!M64BT=1');
-  const [led, setLed] = useState<string>('oD4');
+  const [led, setLed] = useState<string>('oD2');
 
   // 注意，GoPro 網站說 quick capture 打開時，12G 大檔設定會沒效
   return (
@@ -40,8 +40,8 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
         </RadioGroup>
         <RadioGroup row value={led} onChange={(e) => setLed(e.target.value)}>
           <FormControlLabel value='' label='錄影燈:' control={<div />} />
-          <FormControlLabel value='oD4' control={<Radio color='primary' />} label='全開' />
-          <FormControlLabel value='oD2' control={<Radio />} label='僅開後面' />
+          <FormControlLabel value='oD2' control={<Radio color='primary' />} label='僅開後面' />
+          <FormControlLabel value='oD4' control={<Radio />} label='全開' />
           <FormControlLabel value='oD0' control={<Radio />} label='關閉' />
         </RadioGroup>
       </Paper>
@@ -50,7 +50,7 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
 };
 
 const DayParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
-  const [video, setVideo] = useState<string>('r5p30');
+  const [video, setVideo] = useState<string>('r5p24');
   const [shutter, setShutter] = useState<string>('S45');
   const [sharpness, setSharpness] = useState<string>('sH');
   const [wind, setWind] = useState<string>('aA');
@@ -60,8 +60,8 @@ const DayParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={video} onChange={(e) => setVideo(e.target.value)}>
           <FormControlLabel value='' label='每秒幀數:' control={<div />} />
-          <FormControlLabel value='r5p30' control={<Radio color='primary' />} label='30 fps' />
-          <FormControlLabel value='r5p24' control={<Radio />} label='24 fps' />
+          <FormControlLabel value='r5p24' control={<Radio color='primary' />} label='24 fps' />
+          <FormControlLabel value='r5p30' control={<Radio />} label='30 fps' />
         </RadioGroup>
         <RadioGroup row value={shutter} onChange={(e) => setShutter(e.target.value)}>
           <FormControlLabel value='' label='最大快門角度:' control={<div />} />
