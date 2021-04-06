@@ -31,7 +31,7 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   // 注意，GoPro 網站說 quick capture 打開時，12G 大檔設定會沒效
   return (
     <div role='tabpanel' hidden={hidden}>
-      <ORCodeView code={`q0v0oCoB7oS1oR0oW1${led}oV0!MLAPS=0${large}`} />
+      <ORCodeView code={`v0oCoS1oR0${led}oV0${large}`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={large} onChange={(e) => setLarge(e.target.value)}>
           <FormControlLabel value='' label='檔案大小:' control={<div />} />
@@ -49,14 +49,12 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   );
 };
 
-const DayParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
+const Params1Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   const [video, setVideo] = useState<string>('r5p24');
   const [shutter, setShutter] = useState<string>('S45');
-  const [sharpness, setSharpness] = useState<string>('sH');
-  const [wind, setWind] = useState<string>('aA');
   return (
     <div role='tabpanel' hidden={hidden}>
-      <ORCodeView code={`m3dV${video}cGwAx0${sharpness}e2g1q1${wind}oV0i32${shutter}`} />
+      <ORCodeView code={`m3dV${video}g1i32${shutter}`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={video} onChange={(e) => setVideo(e.target.value)}>
           <FormControlLabel value='' label='每秒幀數:' control={<div />} />
@@ -69,6 +67,18 @@ const DayParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
           <FormControlLabel value='S22' control={<Radio />} label='22º' />
           <FormControlLabel value='S10' control={<Radio />} label='10º' />
         </RadioGroup>
+      </Paper>
+    </div>
+  );
+};
+
+const Params2Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
+  const [sharpness, setSharpness] = useState<string>('sH');
+  const [wind, setWind] = useState<string>('aA');
+  return (
+    <div role='tabpanel' hidden={hidden}>
+      <ORCodeView code={`cGwAx0e2q1oW1${sharpness}${wind}`} />
+      <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={sharpness} onChange={(e) => setSharpness(e.target.value)}>
           <FormControlLabel value='' label='影像銳利度:' control={<div />} />
           <FormControlLabel value='sH' control={<Radio color='primary' />} label='高' />
@@ -137,6 +147,31 @@ const TimePanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   );
 };
 
+const LockPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
+  const [lock, setLock] = useState<string>('!MARCH=1');
+  return (
+    <div role='tabpanel' hidden={hidden}>
+      <ORCodeView code={`!EdVq1${lock}!O`} />
+      <Paper classes={{ root: styles.controls }}>
+        <RadioGroup row value={lock} onChange={(e) => setLock(e.target.value)}>
+          <FormControlLabel value='' label='自動錄影:' control={<div />} />
+          <FormControlLabel value='!MARCH=1' control={<Radio color='primary' />} label='打開' />
+          <FormControlLabel value='!MARCH=0' control={<Radio />} label='關閉' />
+
+          <div>
+            <p>
+            設定自動錄影後，相機會先關機，之後每次開機都會直接開始錄影，不能做其他操作，必須靠關機來停止錄影。
+            </p>
+            <p>
+            錄影中，掃關閉的 QR Code 可以關閉此功能。
+            </p>
+          </div>
+        </RadioGroup>
+      </Paper>
+    </div>
+  );
+};
+
 export const CameraSetting = () => {
   const [value, setValue] = React.useState(0);
 
@@ -154,15 +189,19 @@ export const CameraSetting = () => {
           variant='scrollable'
           scrollButtons='auto'
         >
-          <Tab label='基礎設定' />
-          <Tab label='拍攝參數' />
-          <Tab label='時間設定' />
+          <Tab label='基礎' />
+          <Tab label='拍攝' />
+          <Tab label='品質' />
+          <Tab label='時間' />
+          <Tab label='自動' />
         </Tabs>
       </AppBar>
 
       <BaseParamPanel hidden={value !== 0} />
-      <DayParamPanel hidden={value !== 1} />
-      <TimePanel hidden={value !== 2} />
+      <Params1Panel hidden={value !== 1} />
+      <Params2Panel hidden={value !== 2} />
+      <TimePanel hidden={value !== 3} />
+      <LockPanel hidden={value !== 4} />
     </div>
   );
 };
