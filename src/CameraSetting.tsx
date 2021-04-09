@@ -51,10 +51,10 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
 
 const Params1Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   const [video, setVideo] = useState<string>('r5p24');
-  const [shutter, setShutter] = useState<string>('S45');
+  const [shutter, setShutter] = useState<string>('!MEXPT=3');
   return (
     <div role='tabpanel' hidden={hidden}>
-      <ORCodeView code={`m3dV${video}g1i32${shutter}`} />
+      <ORCodeView code={`m3dV${video}g1i32M1${shutter}`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={video} onChange={(e) => setVideo(e.target.value)}>
           <FormControlLabel value='' label='每秒幀數:' control={<div />} />
@@ -63,9 +63,9 @@ const Params1Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
         </RadioGroup>
         <RadioGroup row value={shutter} onChange={(e) => setShutter(e.target.value)}>
           <FormControlLabel value='' label='最大快門角度:' control={<div />} />
-          <FormControlLabel value='S45' control={<Radio color='primary' />} label='45º' />
-          <FormControlLabel value='S22' control={<Radio />} label='22º' />
-          <FormControlLabel value='S10' control={<Radio />} label='10º' />
+          <FormControlLabel value='!MEXPT=3' control={<Radio color='primary' />} label='45º' />
+          <FormControlLabel value='!MEXPT=4' control={<Radio />} label='22º' />
+          <FormControlLabel value='!MEXPT=5' control={<Radio />} label='10º' />
         </RadioGroup>
       </Paper>
     </div>
@@ -77,7 +77,7 @@ const Params2Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
   const [wind, setWind] = useState<string>('aA');
   return (
     <div role='tabpanel' hidden={hidden}>
-      <ORCodeView code={`cGwAx0e2q1oW1${sharpness}${wind}`} />
+      <ORCodeView code={`cGwAx0e2q0oW1${sharpness}${wind}`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={sharpness} onChange={(e) => setSharpness(e.target.value)}>
           <FormControlLabel value='' label='影像銳利度:' control={<div />} />
@@ -148,15 +148,15 @@ const TimePanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
 };
 
 const LockPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
-  const [lock, setLock] = useState<string>('!MARCH=1');
+  const [lock, setLock] = useState<string>('!MARCH=0');
   return (
     <div role='tabpanel' hidden={hidden}>
       <ORCodeView code={`!EdVq1${lock}!O`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={lock} onChange={(e) => setLock(e.target.value)}>
           <FormControlLabel value='' label='自動錄影:' control={<div />} />
-          <FormControlLabel value='!MARCH=1' control={<Radio color='primary' />} label='打開' />
-          <FormControlLabel value='!MARCH=0' control={<Radio />} label='關閉' />
+          <FormControlLabel value='!MARCH=0' control={<Radio color='primary' />} label='關閉' />
+          <FormControlLabel value='!MARCH=1' control={<Radio  />} label='打開' />
 
           <div>
             <p>
