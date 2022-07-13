@@ -50,20 +50,22 @@ const BaseParamPanel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
 };
 
 const Params1Panel: FC<{ hidden?: boolean }> = ({ hidden = true }) => {
-  const [video, setVideo] = useState<string>('r5p24');
-  const [shutter, setShutter] = useState<string>('!MEXPT=3');
+  const [video, setVideo] = useState<string>('r5p30');
+  const [shutter, setShutter] = useState<string>('!MEXPT=2');
   return (
     <div role='tabpanel' hidden={hidden}>
       <ORCodeView code={`m3dV${video}g1i32M1${shutter}`} />
       <Paper classes={{ root: styles.controls }}>
         <RadioGroup row value={video} onChange={(e) => setVideo(e.target.value)}>
           <FormControlLabel value='' label='每秒幀數:' control={<div />} />
-          <FormControlLabel value='r5p24' control={<Radio color='primary' />} label='24 fps' />
-          <FormControlLabel value='r5p30' control={<Radio />} label='30 fps' />
+          <FormControlLabel value='r5p24' control={<Radio />} label='24 fps' />
+          <FormControlLabel value='r5p30' control={<Radio color='primary' />} label='30 fps' />
         </RadioGroup>
         <RadioGroup row value={shutter} onChange={(e) => setShutter(e.target.value)}>
           <FormControlLabel value='' label='最大快門角度:' control={<div />} />
-          <FormControlLabel value='!MEXPT=3' control={<Radio color='primary' />} label='45º' />
+          <FormControlLabel value='!MEXPT=1' control={<Radio />} label='180º' />
+          <FormControlLabel value='!MEXPT=2' control={<Radio color='primary' />} label='90º' />
+          <FormControlLabel value='!MEXPT=3' control={<Radio />} label='45º' />
           <FormControlLabel value='!MEXPT=4' control={<Radio />} label='22º' />
           <FormControlLabel value='!MEXPT=5' control={<Radio />} label='10º' />
         </RadioGroup>
